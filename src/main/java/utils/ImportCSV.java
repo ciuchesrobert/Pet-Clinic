@@ -12,7 +12,6 @@ import java.io.IOException;
 import com.opencsv.CSVReader;
 import dao.VeterinarianDao;
 import java.io.FileReader;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ImportCSV {
@@ -78,7 +77,7 @@ public class ImportCSV {
         }
     }
     public  void importCsvOwner() throws IOException, CsvValidationException {
-        System.out.println("Introduceti locatia fisierului + fisier ex: F:\\owner1.csv");
+        System.out.println("Introduceti numele fisierului daca este in acelasi director cu proiectul consult.csv");
         String location = scanner.next();
         CSVReader csvReader = new CSVReader(new FileReader(location));
         String[] line;

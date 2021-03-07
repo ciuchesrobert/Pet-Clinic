@@ -10,7 +10,7 @@ import java.util.*;
 
 public class ExportCSV {
 
-    public static final String CSV_SEPARATOR = ",";
+    private static final String CSV_SEPARATOR = ",";
 
     public void exportCsvPet(List<Pet> pets) {
         try {
