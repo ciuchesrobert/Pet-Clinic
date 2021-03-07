@@ -1,5 +1,6 @@
 package menu;
 
+import com.opencsv.exceptions.CsvValidationException;
 import dao.VeterinarianDao;
 import model.Consult;
 import model.Owner;
@@ -9,12 +10,17 @@ import service.ConsultService;
 import service.OwnerService;
 import service.PetService;
 import service.VeterinarianService;
+import utils.ExportCSV;
+import utils.ImportCSV;
 import utils.UtilMethods;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
+    public static final ExportCSV exportCSV = new ExportCSV();
+    public static final ImportCSV importCSV = new ImportCSV();
     private static final Scanner scanner = new Scanner(System.in);
     private static final OwnerService ownerService = new OwnerService();
     private static final PetService petService = new PetService();
@@ -22,11 +28,11 @@ public class Menu {
     private static final VeterinarianDao veterinarianDao = new VeterinarianDao();
     private static final VeterinarianService veterinarianService = new VeterinarianService();
 
-    public Menu() {
+    public Menu() throws IOException, CsvValidationException {
         showMenu();
     }
 
-    public static void showMenu() {
+    public static void showMenu() throws IOException, CsvValidationException {
         System.out.println("\nMenu ");
         System.out.println("\n0 - Exit\n1 - Create\n2 - Update\n3 - Delete\n4 - Find\n5 - Import/Export Database");
         System.out.println("Enter your choice: ");
@@ -35,7 +41,7 @@ public class Menu {
         showOption(option);
     }
 
-    public static void showOption(int option) {
+    public static void showOption(int option) throws IOException, CsvValidationException {
 
         switch (option) {
             case 0:
@@ -67,7 +73,7 @@ public class Menu {
         }
     }
 
-    public static void create() {
+    public static void create() throws IOException, CsvValidationException {
         System.out.println("\nCreate Menu:\n0 - Exit\n1 - Create Veterinarian\n2 - Create Pet\n3 - Create Consult\n4 - Create Owner\n5 - Return to Main Menu");
         System.out.println("Enter your choice: ");
         int createOption = scanner.nextInt();
@@ -97,7 +103,7 @@ public class Menu {
         }
     }
 
-    public static void update() {
+    public static void update() throws IOException, CsvValidationException {
         System.out.println("\nUpdate Menu\n0 - Exit\n1 - Update Veterinarian\n2 - Update Pet\n3 - Update Consult\n4 - Update Owner\n5 - Return to Main Menu");
         System.out.println("Enter your choice: ");
         int updateOption = scanner.nextInt();
@@ -127,12 +133,11 @@ public class Menu {
         }
     }
 
-    public static void delete() {
-        int deleteOptions;
+    public static void delete() throws IOException, CsvValidationException {
         System.out.println("\nDelete Menu\n0 - Exit\n1 - Delete Veterinarian\n2 - Delete Pet\n3 - Delete Consult\n4 - Delete Owner\n5 - Return to Main Menu");
         System.out.println("Enter your choice: ");
         Scanner scanner = new Scanner(System.in);
-        deleteOptions = scanner.nextInt();
+        int deleteOptions = scanner.nextInt();
 
         switch (deleteOptions) {
             case 0:
@@ -163,12 +168,11 @@ public class Menu {
         }
     }
 
-    public static void find() {
-        int findOption;
+    public static void find() throws IOException, CsvValidationException {
         System.out.println("\nFind Menu \n0 - Exit \n1 - Find Veterinarian by id\n2 - Find Veterinarian by Name\n3 - Find Pet by id\n4 - Find Consult by id\n5 - Find Owner by id\n6 - Return to Main Menu");
         System.out.println("Enter your choice: ");
         Scanner scanner = new Scanner(System.in);
-        findOption = scanner.nextInt();
+        int findOption = scanner.nextInt();
 
         switch (findOption) {
             case 0:
@@ -203,9 +207,9 @@ public class Menu {
         }
     }
 
-    public static void importExport() {
+    public static void importExport() throws IOException, CsvValidationException {
 
-        System.out.println("\nCreate Menu:\n0 - Exit\n1 - Import CSV file\n2 - Export CSV file\n3 - Return to Main Menu");
+        System.out.println("\nImport/Export Menu:\n0 - Exit\n1 - Import CSV file\n2 - Export CSV file\n3 - Return to Main Menu");
         System.out.println("Enter your choice: ");
 
         int createOption = scanner.nextInt();
@@ -215,12 +219,74 @@ public class Menu {
                 System.exit(0);
                 break;
             case 1:
-
+                importFromCSV();
                 break;
             case 2:
-
+                exportToCSV();
                 break;
             case 3:
+                showMenu();
+                break;
+            default:
+                System.exit(0);
+                break;
+        }
+    }
+
+    private static void importFromCSV() throws IOException, CsvValidationException {
+        System.out.println("\nImport Menu:\n0 - Exit\n1 - Import Pet\n2 - Import Veterinarian\n3 - Import Consult\n4 - Import Owner\n5 - Return to Main Menu");
+        System.out.println("Enter your choice: ");
+
+        int createOption = scanner.nextInt();
+
+        switch (createOption) {
+            case 0:
+                System.exit(0);
+                break;
+            case 1:
+                importCSV.importCsvPet();
+                break;
+            case 2:
+                importCSV.importCsvVeterinarian();
+                break;
+            case 3:
+                importCSV.importCsvConsult();
+                break;
+            case 4:
+                importCSV.importCsvOwner();
+                break;
+            case 5:
+                showMenu();
+                break;
+            default:
+                System.exit(0);
+                break;
+        }
+    }
+
+    private static void exportToCSV() throws IOException, CsvValidationException {
+        System.out.println("\nExport Menu:\n0 - Exit\n1 - Export Pet\n2 - Export Veterinarian\n3 - Export Consult\n4 - Export Owner\n5 - Return to Main Menu");
+        System.out.println("Enter your choice: ");
+
+        int createOption = scanner.nextInt();
+
+        switch (createOption) {
+            case 0:
+                System.exit(0);
+                break;
+            case 1:
+                exportCSV.exportCsvPet(petService.findAllPets());
+                break;
+            case 2:
+                exportCSV.exportCsvVet(veterinarianService.findAllVeterinarians());
+                break;
+            case 3:
+                exportCSV.exportCsvConsult(consultService.findAllConsults());
+                break;
+            case 4:
+                exportCSV.exportCsvOwner(ownerService.findAllOwners());
+                break;
+            case 5:
                 showMenu();
                 break;
             default:
@@ -245,7 +311,7 @@ public class Menu {
         consultService.createConsult();
     }
 
-    private static void updatePet() {
+    private static void updatePet() throws IOException, CsvValidationException {
         petService.displayAllPets();
         System.out.println("\nPlease insert pet id you want to update:");
         Long idPet = scanner.nextLong();
@@ -257,7 +323,7 @@ public class Menu {
         }
     }
 
-    private static void updatePetMenu(Pet pet) {
+    private static void updatePetMenu(Pet pet) throws IOException, CsvValidationException {
         System.out.println("\nUpdate Pet Menu\n0 - Exit\n1 - Update Name\n2 - Update Race\n3 - Update BirthDate\n4 - Update isVaccinated\n5 - Update Owner\n6 - Save and Return to Main Menu");
         System.out.println("\t Enter your choice: ");
         int updatePet = scanner.nextInt();
@@ -301,7 +367,7 @@ public class Menu {
         }
     }
 
-    private static void updateConsult() {
+    private static void updateConsult() throws IOException, CsvValidationException {
         consultService.displayAllConsults();
         System.out.println("\nPlease insert consult id you want to update:");
         Long idConsult = scanner.nextLong();
@@ -313,7 +379,7 @@ public class Menu {
         }
     }
 
-    private static void updateConsultMenu(Consult consult) {
+    private static void updateConsultMenu(Consult consult) throws IOException, CsvValidationException {
         System.out.println("\nUpdate Consult Menu\n0 - Exit\n1 - Update Date\n2 - Update Description\n3 - Update Veterinarian\n4 - Update Pet\n5 - Save and return to Main Menu");
         System.out.println(" Enter your choice: ");
         int updateConsult = scanner.nextInt();
@@ -351,7 +417,7 @@ public class Menu {
         }
     }
 
-    private static void updateOwner() {
+    private static void updateOwner() throws IOException, CsvValidationException {
         ownerService.displayAllOwners();
         System.out.println("\nPlease insert consult id you want to update:");
         Long idOwner = scanner.nextLong();
@@ -363,7 +429,7 @@ public class Menu {
         }
     }
 
-    private static void updateOwnerMenu(Owner owner) {
+    private static void updateOwnerMenu(Owner owner) throws IOException, CsvValidationException {
         System.out.println("\nUpdate Owner Menu\n0 - Exit\n1 - Update first name\n2 - Update last name\n3 - Update phone number\n4 - Update email\n5 - Return to Main Menu");
         System.out.println(" Enter your choice: ");
         int updateConsult = scanner.nextInt();
@@ -402,7 +468,7 @@ public class Menu {
         }
     }
 
-    private static void updateVeterinarian() {
+    private static void updateVeterinarian() throws IOException, CsvValidationException {
         veterinarianService.displayAllVeterinarians();
         System.out.println("\nPlease insert veterinarian id you want to update:");
         Long idVeterinarian = scanner.nextLong();
@@ -414,7 +480,7 @@ public class Menu {
         }
     }
 
-    private static void updateVeterinarianMenu(Veterinarian veterinarian) {
+    private static void updateVeterinarianMenu(Veterinarian veterinarian) throws IOException, CsvValidationException {
         System.out.println("\nUpdate Veterinarian Menu\n0 - Exit\n1 - Update first name\n2 - Update last name\n3 - Update address\n4 - Update speciality\n5 - Save and return to Main Menu");
         System.out.println(" Enter your choice: ");
         int updateVeterinarian = scanner.nextInt();

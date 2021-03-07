@@ -40,7 +40,7 @@ public class OwnerDao {
             transaction = session.beginTransaction();
             session.save(owner);
             transaction.commit();
-            System.out.println("Owner was created: " + owner);
+            System.out.println("Owner was created: \n" + owner);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();

@@ -13,8 +13,8 @@ public class PetDao {
     public Pet findByIdPet(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Pet Pet = session.find(Pet.class, id);
-            return Pet;
+            Pet pet = session.find(Pet.class, id);
+            return pet;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -30,7 +30,7 @@ public class PetDao {
             transaction = session.beginTransaction();
             session.save(pet);
             transaction.commit();
-            System.out.println("Pet was created: " + pet);
+            System.out.println("Pet was created: \n" + pet);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();

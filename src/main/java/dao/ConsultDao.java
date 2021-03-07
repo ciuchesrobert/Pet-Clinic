@@ -30,7 +30,7 @@ public class ConsultDao {
             transaction = session.beginTransaction();
             session.save(consult);
             transaction.commit();
-            System.out.println("Consult was created: " + consult);
+            System.out.println("Consult was created: \n" + consult);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();

@@ -13,12 +13,12 @@ public class VeterinarianService {
     private static VeterinarianDao veterinarianDao = new VeterinarianDao();
 
     public void createVeterinarian() {
-        System.out.println("Please insert veterinarian's last name:");
-        String lastName = scanner.next();
-        lastName = UtilMethods.firstLetterToUpperCase(lastName);
         System.out.println("Please insert veterinarian's first name:");
         String firstname = scanner.next();
         firstname = UtilMethods.firstLetterToUpperCase(firstname);
+        System.out.println("Please insert veterinarian's last name:");
+        String lastName = scanner.next();
+        lastName = UtilMethods.firstLetterToUpperCase(lastName);
         System.out.println("Please insert veterinarian's address:");
         String address = scanner.next();
         System.out.println("Please insert veterinarian's speciality:");

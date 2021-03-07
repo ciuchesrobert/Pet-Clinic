@@ -68,6 +68,14 @@ public class Consult {
         this.pet = pet;
     }
 
+    public Long getConsultId() {
+        return consultId;
+    }
+
+    public void setConsultId(Long consultId) {
+        this.consultId = consultId;
+    }
+
     @Override
     public String toString() {
         return "Consult{" +

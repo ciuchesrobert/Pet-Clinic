@@ -46,7 +46,7 @@ public class VeterinarianDao {
             transaction = session.beginTransaction();
             session.save(veterinarian);
             transaction.commit();
-            System.out.println("Veterinarian created!" + veterinarian);
+            System.out.println("Veterinarian was created: \n" + veterinarian);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
