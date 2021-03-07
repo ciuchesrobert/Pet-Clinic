@@ -19,10 +19,10 @@ public class OwnerService {
 
     public void createOwner() {
         System.out.println("Please insert owner last name:");
-        String lastName = scanner.next();
+        String lastName = scanner.next() + scanner.nextLine();
         lastName = UtilMethods.firstLetterToUpperCase(lastName);
         System.out.println("Please insert owner first name:");
-        String firstname = scanner.next();
+        String firstname = scanner.next() + scanner.nextLine();
         firstname = UtilMethods.firstLetterToUpperCase(firstname);
         System.out.println("Please insert owner phone number:");
         String phoneNumber = scanner.next();

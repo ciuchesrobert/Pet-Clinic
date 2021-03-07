@@ -14,15 +14,15 @@ public class VeterinarianService {
 
     public void createVeterinarian() {
         System.out.println("Please insert veterinarian's first name:");
-        String firstname = scanner.next();
+        String firstname = scanner.next() + scanner.nextLine();
         firstname = UtilMethods.firstLetterToUpperCase(firstname);
         System.out.println("Please insert veterinarian's last name:");
-        String lastName = scanner.next();
+        String lastName = scanner.next() + scanner.nextLine();
         lastName = UtilMethods.firstLetterToUpperCase(lastName);
         System.out.println("Please insert veterinarian's address:");
-        String address = scanner.next();
+        String address = scanner.next() + scanner.nextLine();
         System.out.println("Please insert veterinarian's speciality:");
-        String speciality = scanner.next();
+        String speciality = scanner.next() + scanner.nextLine();
 
         Veterinarian veterinarian = new Veterinarian(lastName, firstname, address, speciality);
         veterinarianDao.createVeterinarian(veterinarian);

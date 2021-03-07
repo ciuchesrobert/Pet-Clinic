@@ -25,10 +25,10 @@ public class PetService {
 
     public void createPet() {
         System.out.println("Please insert pet's name: ");
-        String name = scanner.next();
+        String name = scanner.next() + scanner.nextLine();
         name = UtilMethods.firstLetterToUpperCase(name);
         System.out.println("Please insert pet's race: ");
-        String race = scanner.next();
+        String race = scanner.next() + scanner.nextLine();
         System.out.println("Please insert birthdate of the pet:");
         String birthDate = scanner.next();
         System.out.println("Please advise if he's vaccinated:");

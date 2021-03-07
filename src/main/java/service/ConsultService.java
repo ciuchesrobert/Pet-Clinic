@@ -23,7 +23,7 @@ public class ConsultService {
         System.out.println("Please insert consults date:");
         String consultDate = scanner.next();
         System.out.println("Please insert the description");
-        String description = scanner.next();
+        String description = scanner.next() + scanner.nextLine();
         Veterinarian vetFromList = selectVeterinarian();
         Pet petFromList = selectPet();
 
