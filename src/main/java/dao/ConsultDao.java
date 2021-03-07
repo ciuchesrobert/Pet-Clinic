@@ -42,14 +42,14 @@ public class ConsultDao {
         }
     }
 
-    public void deleteConsult(Consult Consult) {
+    public void deleteConsult(Consult consult) {
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             transaction = session.beginTransaction();
-            session.delete(Consult);
+            session.delete(consult);
             transaction.commit();
-            System.out.println("Consult was deleted");
+            System.out.println("Consult was deleted:\n" + consult);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();

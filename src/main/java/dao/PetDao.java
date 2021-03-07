@@ -49,7 +49,7 @@ public class PetDao {
             transaction = session.beginTransaction();
             session.delete(pet);
             transaction.commit();
-            System.out.println("Pet was deleted: " + pet);
+            System.out.println("Pet was deleted: \n" + pet);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
@@ -68,7 +68,7 @@ public class PetDao {
             transaction = session.beginTransaction();
             session.update(pet);
             transaction.commit();
-            System.out.println("Pet was updated: " + pet);
+            System.out.println("Pet was updated: \n" + pet);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();

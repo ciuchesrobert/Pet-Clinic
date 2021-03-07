@@ -32,7 +32,7 @@ public class ExportCSV {
             }
             bw.flush();
             bw.close();
-            System.out.println("Pet exported to .csv!");
+            System.out.println("Pet exported list to .csv!");
         } catch (IOException e) {
             System.out.println("Something went wrong!");
         }
@@ -56,7 +56,7 @@ public class ExportCSV {
             }
             bw.flush();
             bw.close();
-            System.out.println("Veterinarian exported to .csv!");
+            System.out.println("Veterinarian list exported to .csv!");
         } catch (IOException e) {
             System.out.println("Something went wrong!");
         }
@@ -80,7 +80,7 @@ public class ExportCSV {
             }
             bw.flush();
             bw.close();
-            System.out.println("Consult exported to .csv!");
+            System.out.println("Consult list exported to .csv!");
         } catch (IOException e) {
             System.out.println("Something went wrong!");
         }
@@ -104,7 +104,7 @@ public class ExportCSV {
             }
             bw.flush();
             bw.close();
-            System.out.println("Owner exported to .csv!");
+            System.out.println("Owner list exported to .csv!");
         } catch (IOException e) {
             System.out.println("Something went wrong!");
         }

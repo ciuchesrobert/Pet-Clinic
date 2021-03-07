@@ -59,7 +59,7 @@ public class OwnerDao {
             transaction = session.beginTransaction();
             session.delete(owner);
             transaction.commit();
-            System.out.println("Owner was deleted" + owner);
+            System.out.println("Owner was deleted:\n" + owner);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
@@ -78,7 +78,7 @@ public class OwnerDao {
             transaction = session.beginTransaction();
             session.update(owner);
             transaction.commit();
-            System.out.println("Owner was updated: " + owner);
+            System.out.println("Owner was updated: \n" + owner);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();

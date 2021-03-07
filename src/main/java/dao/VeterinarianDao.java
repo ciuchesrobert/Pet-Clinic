@@ -66,7 +66,7 @@ public class VeterinarianDao {
             transaction = session.beginTransaction();
             session.delete(veterinarian);
             transaction.commit();
-            System.out.println("Veterinarian deleted!" + veterinarian);
+            System.out.println("Veterinarian deleted!\n" + veterinarian);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
@@ -85,7 +85,7 @@ public class VeterinarianDao {
             transaction = session.beginTransaction();
             session.update(veterinarian);
             transaction.commit();
-            System.out.println("Veterinarian was updated: " + veterinarian);
+            System.out.println("Veterinarian was updated:\n " + veterinarian);
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
