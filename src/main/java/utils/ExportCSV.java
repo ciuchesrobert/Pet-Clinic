@@ -8,7 +8,7 @@ import model.Veterinarian;
 import java.io.*;
 import java.util.*;
 
-public class ExportCSV {
+public class ExportCsv {
 
     private static final String CSV_SEPARATOR = ",";
 

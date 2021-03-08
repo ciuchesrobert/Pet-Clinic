@@ -14,7 +14,7 @@ import dao.VeterinarianDao;
 import java.io.FileReader;
 import java.util.Scanner;
 
-public class ImportCSV {
+public class ImportCsv {
 
     private static final Scanner scanner = new Scanner(System.in);
 

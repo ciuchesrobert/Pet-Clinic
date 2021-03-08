@@ -10,17 +10,16 @@ import service.ConsultService;
 import service.OwnerService;
 import service.PetService;
 import service.VeterinarianService;
-import utils.ExportCSV;
-import utils.ImportCSV;
+import utils.ExportCsv;
+import utils.ImportCsv;
 import utils.UtilMethods;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    public static final ExportCSV exportCSV = new ExportCSV();
-    public static final ImportCSV importCSV = new ImportCSV();
+    public static final ExportCsv exportCSV = new ExportCsv();
+    public static final ImportCsv importCSV = new ImportCsv();
     private static final Scanner scanner = new Scanner(System.in);
     private static final OwnerService ownerService = new OwnerService();
     private static final PetService petService = new PetService();
@@ -49,23 +48,18 @@ public class Menu {
                 break;
             case 1:
                 create();
-                showMenu();
                 break;
             case 2:
                 update();
-                showMenu();
                 break;
             case 3:
                 delete();
-                showMenu();
                 break;
             case 4:
                 find();
-                showMenu();
                 break;
             case 5:
                 importExport();
-                showMenu();
                 break;
             default:
                 System.exit(0);
@@ -84,15 +78,19 @@ public class Menu {
                 break;
             case 1:
                 createVet();
+                showMenu();
                 break;
             case 2:
                 createPet();
+                showMenu();
                 break;
             case 3:
                 createConsult();
+                showMenu();
                 break;
             case 4:
                 createOwner();
+                showMenu();
                 break;
             case 5:
                 showMenu();
@@ -114,15 +112,19 @@ public class Menu {
                 break;
             case 1:
                 updateVeterinarian();
+                showMenu();
                 break;
             case 2:
                 updatePet();
+                showMenu();
                 break;
             case 3:
                 updateConsult();
+                showMenu();
                 break;
             case 4:
                 updateOwner();
+                showMenu();
                 break;
             case 5:
                 showMenu();
@@ -219,10 +221,12 @@ public class Menu {
                 System.exit(0);
                 break;
             case 1:
-                importFromCSV();
+                importFromCsv();
+                showMenu();
                 break;
             case 2:
-                exportToCSV();
+                exportToCsv();
+                showMenu();
                 break;
             case 3:
                 showMenu();
@@ -233,7 +237,7 @@ public class Menu {
         }
     }
 
-    private static void importFromCSV() throws IOException, CsvValidationException {
+    private static void importFromCsv() throws IOException, CsvValidationException {
         System.out.println("\nImport Menu:\n0 - Exit\n1 - Import Pet\n2 - Import Veterinarian\n3 - Import Consult\n4 - Import Owner\n5 - Return to Main Menu");
         System.out.println("Enter your choice: ");
 
@@ -244,16 +248,16 @@ public class Menu {
                 System.exit(0);
                 break;
             case 1:
-                importCSV.importCsvPet();
+                importPet();
                 break;
             case 2:
-                importCSV.importCsvVeterinarian();
+                importVeterinarian();
                 break;
             case 3:
-                importCSV.importCsvConsult();
+                importConsult();
                 break;
             case 4:
-                importCSV.importCsvOwner();
+                importOwner();
                 break;
             case 5:
                 showMenu();
@@ -264,7 +268,7 @@ public class Menu {
         }
     }
 
-    private static void exportToCSV() throws IOException, CsvValidationException {
+    private static void exportToCsv() throws IOException, CsvValidationException {
         System.out.println("\nExport Menu:\n0 - Exit\n1 - Export Pet\n2 - Export Veterinarian\n3 - Export Consult\n4 - Export Owner\n5 - Return to Main Menu");
         System.out.println("Enter your choice: ");
 
@@ -275,16 +279,16 @@ public class Menu {
                 System.exit(0);
                 break;
             case 1:
-                exportCSV.exportCsvPet(petService.findAllPets());
+                exportPet();
                 break;
             case 2:
-                exportCSV.exportCsvVet(veterinarianService.findAllVeterinarians());
+                exportVet();
                 break;
             case 3:
-                exportCSV.exportCsvConsult(consultService.findAllConsults());
+                exportConsult();
                 break;
             case 4:
-                exportCSV.exportCsvOwner(ownerService.findAllOwners());
+                exportOwner();
                 break;
             case 5:
                 showMenu();
@@ -293,10 +297,6 @@ public class Menu {
                 System.exit(0);
                 break;
         }
-    }
-
-    private static void createOwner() {
-        ownerService.createOwner();
     }
 
     private static void createPet() {
@@ -309,6 +309,10 @@ public class Menu {
 
     private static void createConsult() {
         consultService.createConsult();
+    }
+
+    private static void createOwner() {
+        ownerService.createOwner();
     }
 
     private static void updatePet() throws IOException, CsvValidationException {
@@ -438,25 +442,30 @@ public class Menu {
                 System.exit(0);
                 break;
             case 1:
-                System.out.println("Please insert owner first name");
+                System.out.println("Please insert owner first name:\n");
                 String firstName = UtilMethods.firstLetterToUpperCase(scanner.next());
                 owner.setFirstName(firstName);
                 updateOwnerMenu(owner);
                 break;
             case 2:
-                System.out.println("Please insert owner last name");
+                System.out.println("Please insert owner last name:\n");
                 String lastName = UtilMethods.firstLetterToUpperCase(scanner.next());
                 owner.setLastName(lastName);
                 updateOwnerMenu(owner);
                 break;
             case 3:
-                System.out.println("Please insert owner phone number");
+                System.out.println("Please insert owner phone number:\n");
                 owner.setPhoneNumber(scanner.next());
                 updateOwnerMenu(owner);
                 break;
             case 4:
-                System.out.println("Please insert owner email");
-                owner.setEmail(scanner.next());
+                System.out.println("Please insert owner email:\n");
+                String email = scanner.next();
+                if (ownerService.isValidEmailAddress(email)) {
+                    owner.setEmail(email);
+                } else {
+                    System.out.println("Your email is invalid!\n");
+                }
                 updateOwnerMenu(owner);
                 break;
             case 5:
@@ -591,5 +600,36 @@ public class Menu {
         }
     }
 
+    public static void exportPet() {
+        exportCSV.exportCsvPet(petService.findAllPets());
+    }
+
+    public static void exportVet() {
+        exportCSV.exportCsvVet(veterinarianService.findAllVeterinarians());
+    }
+
+    public static void exportConsult() {
+        exportCSV.exportCsvConsult(consultService.findAllConsults());
+    }
+
+    private static void exportOwner() {
+        exportCSV.exportCsvOwner(ownerService.findAllOwners());
+    }
+
+    private static void importPet() throws IOException, CsvValidationException {
+        importCSV.importCsvPet();
+    }
+
+    private static void importVeterinarian() throws IOException, CsvValidationException {
+        importCSV.importCsvVeterinarian();
+    }
+
+    private static void importConsult() throws IOException, CsvValidationException {
+        importCSV.importCsvConsult();
+    }
+
+    private static void importOwner() throws IOException, CsvValidationException {
+        importCSV.importCsvOwner();
+    }
 }
 
