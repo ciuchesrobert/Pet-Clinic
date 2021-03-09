@@ -10,16 +10,16 @@ import service.ConsultService;
 import service.OwnerService;
 import service.PetService;
 import service.VeterinarianService;
-import utils.ExportCsv;
-import utils.ImportCsv;
+import utils.ExportCSV;
+import utils.ImportCSV;
 import utils.UtilMethods;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    public static final ExportCsv exportCSV = new ExportCsv();
-    public static final ImportCsv importCSV = new ImportCsv();
+    public static final ExportCSV exportCSV = new ExportCSV();
+    public static final ImportCSV importCSV = new ImportCSV();
     private static final Scanner scanner = new Scanner(System.in);
     private static final OwnerService ownerService = new OwnerService();
     private static final PetService petService = new PetService();
