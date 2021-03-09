@@ -211,7 +211,7 @@ public class Menu {
 
     public static void importExport() throws IOException, CsvValidationException {
 
-        System.out.println("\nImport/Export Menu:\n0 - Exit\n1 - Import CSV file\n2 - Export CSV file\n3 - Return to Main Menu");
+        System.out.println("\nImport/Export Menu:\n0 - Exit\n1 - Import from CSV file\n2 - Export to CSV file\n3 - Return to Main Menu");
         System.out.println("Enter your choice: ");
 
         int createOption = scanner.nextInt();
